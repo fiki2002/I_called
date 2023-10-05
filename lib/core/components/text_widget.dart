@@ -30,7 +30,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.openSans(
+      style: GoogleFonts.raleway(
         // style: TextStyle(
         fontSize: fontSize,
         color: textColor,
