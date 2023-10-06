@@ -20,8 +20,11 @@ class AppRouter {
     );
   }
 
-  Future<dynamic> navigateToAndReplace(String routeName) {
-    return navigatorKey.currentState!.pushReplacementNamed(routeName);
+  Future<dynamic> navigateToAndReplace(String routeName, {Object? arguments}) {
+    return navigatorKey.currentState!.pushReplacementNamed(
+      routeName,
+      arguments: arguments,
+    );
   }
 
   Future<dynamic> clearRouteAndPush(String routeName) {

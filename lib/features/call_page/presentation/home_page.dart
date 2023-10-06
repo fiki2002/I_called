@@ -7,7 +7,7 @@ import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/core/utils/utils.dart';
 import 'package:i_called/features/call_page/domain/user_model.dart';
-import 'package:i_called/features/call_page/presentation/preview_page.dart';
+import 'package:i_called/features/call_page/presentation/create_or_join_call.dart';
 
 class HomePage extends StatefulWidget {
   static const route = 'home-page';
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      useSingleScroll: false,
       appBar: AppBar(
         backgroundColor: kcWhiteColor,
         foregroundColor: kcTextColor,
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         title: const TextWidget(
           'iCalled',
           fontSize: kfsLarge,
-          fontWeight: FontWeight.w700,
+          fontWeight: kW700,
         ),
       ),
       body: Form(
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             Button(
               text: 'Continue',
               onTap: () => _submit(),
-            )
+            ),
           ],
         ),
       ),
@@ -76,9 +77,10 @@ class _HomePageState extends State<HomePage> {
       final User user = User(
         id: id,
         userName: _controller.text,
+        callId: '',
       );
 
-      AppRouter.instance.navigateTo(PreviewPage.route, arguments: user);
+      AppRouter.instance.navigateTo(CreateOrJoinCall.route, arguments: user);
     }
   }
 }

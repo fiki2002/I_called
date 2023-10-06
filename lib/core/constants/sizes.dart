@@ -1,7 +1,7 @@
 /// very tiny text font size
 const double kfsVeryTiny = 12.0;
 
-const double kSmall10 = 12.0;
+const double kSmall10 = 10.0;
 
 /// tiny text font size
 const double kfsTiny = 14.0;

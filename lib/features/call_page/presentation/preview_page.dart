@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
+import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/core/utils/utils.dart';
 import 'package:i_called/features/call_page/domain/user_model.dart';
+import 'package:i_called/features/call_page/presentation/zego_cloud_prebuilt_widget.dart';
 
-class PreviewPage extends StatelessWidget {
+class PreviewPage extends StatefulWidget {
   const PreviewPage({super.key, required this.user});
   static const route = '/preview-page';
   final User user;
+
+  @override
+  State<PreviewPage> createState() => _PreviewPageState();
+}
+
+class _PreviewPageState extends State<PreviewPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
@@ -20,7 +28,7 @@ class PreviewPage extends StatelessWidget {
               radius: kBig70,
               backgroundColor: kPrimaryColor.withOpacity(.4),
               child: TextWidget(
-                user.userName[0],
+                widget.user.userName[0],
                 fontSize: kBig50,
                 textColor: kcWhiteColor,
                 fontWeight: kW700,
@@ -29,7 +37,7 @@ class PreviewPage extends StatelessWidget {
           ),
           Gap.box(height: kfsExtraLarge),
           TextWidget(
-            user.userName,
+            widget.user.userName,
             fontSize: kBig30,
             fontWeight: kW600,
             textColor: kcTextColor,
@@ -43,10 +51,16 @@ class PreviewPage extends StatelessWidget {
                 backgroundColor: kcBorder1,
                 child: audioIcon.svg,
               ),
-              CircleAvatar(
-                radius: kBig30,
-                backgroundColor: kcBorder1,
-                child: videoIcon.svg,
+              GestureDetector(
+                onTap: () => AppRouter.instance.navigateToAndReplace(
+                  VideoCallPage.route,
+                  arguments: widget.user,
+                ),
+                child: CircleAvatar(
+                  radius: kBig30,
+                  backgroundColor: kcBorder1,
+                  child: videoIcon.svg,
+                ),
               ),
             ],
           ),
@@ -56,3 +70,4 @@ class PreviewPage extends StatelessWidget {
     );
   }
 }
+

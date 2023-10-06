@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "570652499561",
+    "project_id": "icalled-2bed4",
+    "storage_bucket": "icalled-2bed4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570652499561:android:77e49160c32f50dc470cf8",
+        "android_client_info": {
+          "package_name": "com.example.i_called"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMcesGO8JowohU_UBjROZykZYjHJTU6PY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

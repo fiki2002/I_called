@@ -61,6 +61,7 @@ class ScaffoldWidget extends StatelessWidget {
             : Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: usePadding ? kGlobalPadding : 0,
+                  vertical: usePadding ? kGlobalPadding : 0,
                 ),
                 child: body,
               ),
