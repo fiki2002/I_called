@@ -19,6 +19,8 @@ dependencies:
   zego_uikit_signaling_plugin: ^2.5.2
   firebase_core: ^2.17.0
   firebase_auth: ^4.10.1
+  equatable: ^2.0.5
+  fpdart: ^1.1.0
 
 dependency_overrides:
   awesome_notifications: ^0.8.2
