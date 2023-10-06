@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
-import 'package:i_called/features/call_page/presentation/home_page.dart';
+import 'package:i_called/features/auth/presentation/login_view.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const route = "/onboarding";
@@ -33,8 +33,8 @@ class OnboardingScreen extends StatelessWidget {
           Gap.box(height: kBig100),
           Button(
             text: 'Get Started',
-            onTap: () => AppRouter.instance.clearRouteAndPush(HomePage.route),
-          )
+            onTap: () => AppRouter.instance.clearRouteAndPush(LoginView.route),
+          ),
         ],
       ),
     );

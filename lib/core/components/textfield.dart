@@ -12,6 +12,10 @@ class TextFieldWidget extends StatelessWidget {
     this.hintText,
     this.keyboardType,
     this.inputFormats,
+    this.title,
+    this.focusNode,
+    this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   final String? Function(String?)? validator;
@@ -20,32 +24,32 @@ class TextFieldWidget extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormats;
+  final String? title;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final Function(String)? onFieldSubmitted;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        switch (showDefault) {
-          true => Column(
-              children: [
-                const TextWidget(
-                  'Enter your user name',
-                  fontSize: kfsTiny,
-                  fontWeight: kW500,
-                ),
-                Gap.box(height: kfsTiny),
-              ],
-            ),
-          false => const SizedBox.shrink(),
-          _ => const SizedBox.shrink(),
-        },
+        TextWidget(
+          title ?? 'Enter your user name',
+          fontSize: kfsTiny,
+          fontWeight: kW500,
+        ),
+        Gap.box(height: kfsTiny),
         TextFormField(
+          onFieldSubmitted: onFieldSubmitted,
+          textInputAction: textInputAction,
+          focusNode: focusNode,
           inputFormatters: inputFormats,
           keyboardType: keyboardType,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(
-            hintText: showDefault == true ? 'Enter your user name' : hintText,
+            hintText: hintText ?? 'Enter your user name',
             border: _borderStyle,
             focusedBorder: _enabledBorder,
             enabledBorder: _borderStyle,

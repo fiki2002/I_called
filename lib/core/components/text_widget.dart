@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,6 +63,7 @@ class TwoSpanTextWidget extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.decoration,
+    this.recognizer2,
   }) : super(key: key);
 
   final String text;
@@ -76,6 +78,7 @@ class TwoSpanTextWidget extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final TextDecoration? decoration;
+  final GestureRecognizer? recognizer2;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +94,7 @@ class TwoSpanTextWidget extends StatelessWidget {
         children: <InlineSpan>[
           TextSpan(
             text: text2,
+            recognizer: recognizer2,
             style: GoogleFonts.inter(
               fontSize: fontSize2,
               color: textColor2,
