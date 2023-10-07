@@ -7,7 +7,6 @@ import 'package:i_called/core/components/textfield.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/core/utils/utils.dart';
-import 'package:i_called/features/call_page/domain/user_model.dart';
 import 'package:i_called/features/call_page/presentation/preview_page.dart';
 import 'package:i_called/features/call_page/presentation/zego_cloud_prebuilt_widget.dart';
 
@@ -15,22 +14,18 @@ class InputDialog extends StatefulWidget {
   const InputDialog({
     super.key,
     this.isCreate = false,
-    required this.user,
   });
   final bool isCreate;
-  final User user;
 
   static Future<void> show(
     BuildContext context, {
     bool isCreate = false,
-    required User user,
   }) {
     return showAdaptiveDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) => InputDialog(
         isCreate: isCreate,
-        user: user,
       ),
     );
   }
@@ -77,7 +72,7 @@ class _InputDialogState extends State<InputDialog> {
               ),
               Gap.box(height: kfsExtraLarge),
               TextFieldWidget(
-                controller: _controller,
+                // controller: _controller,
                 showDefault: false,
                 inputFormats: [FilteringTextInputFormatter.digitsOnly],
                 hintText: '0000',
@@ -125,16 +120,16 @@ class _InputDialogState extends State<InputDialog> {
 
     await Future.delayed(const Duration(milliseconds: 200));
 
-    AppRouter.instance.navigateTo(PreviewPage.route, arguments: widget.user);
+    AppRouter.instance.navigateTo(PreviewPage.route);
   }
 
   void _joinCall() {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      widget.user.callId = _controller.text;
+      // widget.user.callId = _controller.text;
       AppRouter.instance.navigateToAndReplace(
         VideoCallPage.route,
-        arguments: widget.user,
+        // arguments: widget.user,
         
       );
     }

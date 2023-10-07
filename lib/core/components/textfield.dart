@@ -7,7 +7,6 @@ class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
     super.key,
     this.validator,
-    required this.controller,
     this.showDefault = true,
     this.hintText,
     this.keyboardType,
@@ -15,11 +14,10 @@ class TextFieldWidget extends StatelessWidget {
     this.title,
     this.focusNode,
     this.textInputAction,
-    this.onFieldSubmitted,
+    this.onFieldSubmitted, this.onSaved,
   });
 
   final String? Function(String?)? validator;
-  final TextEditingController controller;
   final bool? showDefault;
   final String? hintText;
   final TextInputType? keyboardType;
@@ -28,6 +26,7 @@ class TextFieldWidget extends StatelessWidget {
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
   final Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +45,8 @@ class TextFieldWidget extends StatelessWidget {
           focusNode: focusNode,
           inputFormatters: inputFormats,
           keyboardType: keyboardType,
+          onSaved: onSaved ,
           validator: validator,
-          controller: controller,
           decoration: InputDecoration(
             hintText: hintText ?? 'Enter your user name',
             border: _borderStyle,

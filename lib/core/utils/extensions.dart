@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:i_called/core/constants/palette.dart';
+import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
+import 'package:provider/provider.dart';
 
 extension ValidatingExtensions on String {
   String? validateAnyField({String? field}) {
@@ -77,4 +79,8 @@ extension SvgExtension on String {
         fit: BoxFit.scaleDown,
         color: kcWhiteColor,
       );
+}
+
+extension BuildContextNotifier on BuildContext {
+  AuthNotifier get auth => Provider.of<AuthNotifier>(this, listen: false);
 }

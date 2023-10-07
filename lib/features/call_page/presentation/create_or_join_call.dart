@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
-import 'package:i_called/features/call_page/domain/user_model.dart';
 import 'package:i_called/features/call_page/presentation/input_dialog.dart';
 
 class CreateOrJoinCall extends StatelessWidget {
-  const CreateOrJoinCall({super.key, required this.user});
-  final User user;
+  const CreateOrJoinCall({super.key});
   static const String route = '/create-or join-call';
   @override
   Widget build(BuildContext context) {
@@ -15,8 +13,8 @@ class CreateOrJoinCall extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextWidget(
-            'Hey there, ${user.userName}',
+          const TextWidget(
+            'Hey there',
             fontSize: kBig30,
             fontWeight: kW700,
           ),
@@ -37,7 +35,6 @@ class CreateOrJoinCall extends StatelessWidget {
                   onTap: () => InputDialog.show(
                     context,
                     isCreate: true,
-                    user: user,
                   ),
                 ),
               ),
@@ -47,7 +44,6 @@ class CreateOrJoinCall extends StatelessWidget {
                   text: 'Join',
                   onTap: () => InputDialog.show(
                     context,
-                    user: user,
                   ),
                 ),
               ),
