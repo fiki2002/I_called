@@ -6,6 +6,10 @@ import 'package:i_called/features/auth/domain/repositories/auth_repo.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
+import 'package:i_called/features/dashboard/data/datasource/home_remote_datasource.dart';
+import 'package:i_called/features/dashboard/data/repo_impl/home_repo_impl.dart';
+import 'package:i_called/features/dashboard/domain/repository/home_page_repo.dart';
+import 'package:i_called/features/dashboard/domain/usecase/get_users_usecase.dart';
 
 class SetUpLocators {
   static const SetUpLocators _instance = SetUpLocators._();
@@ -16,8 +20,11 @@ class SetUpLocators {
 
   static void init() {
     /// Data
-    getIt.registerLazySingleton<AuthenticationRemoteDataSourceImpl>(
+    getIt.registerLazySingleton<AuthenticationRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(firebaseHelper: FirebaseHelper()),
+    );
+    getIt.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(firebaseHelper: FirebaseHelper()),
     );
 
     /// UseCases
@@ -36,12 +43,21 @@ class SetUpLocators {
         authenticationRepository: getIt<AuthRepository>(),
       ),
     );
+    getIt.registerLazySingleton<GetUsersUsecase>(
+      () => GetUsersUsecase(
+        homeRepository: getIt<HomeRepository>(),
+      ),
+    );
 
     /// Repository
     getIt.registerLazySingleton<AuthRepository>(
       () => AuthRepositoryImpl(
-        authenticationRemoteDataSource:
-            getIt<AuthenticationRemoteDataSourceImpl>(),
+        authenticationRemoteDataSource: getIt<AuthenticationRemoteDataSource>(),
+      ),
+    );
+      getIt.registerLazySingleton<HomeRepository>(
+      () => HomeRepositoryImpl(
+        homeRemoteDataSource: getIt<HomeRemoteDataSource>(),
       ),
     );
   }

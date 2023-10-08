@@ -14,7 +14,7 @@ import 'package:i_called/features/auth/domain/entities/auth_entities.dart';
 import 'package:i_called/features/auth/domain/repositories/auth_repo.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
-  final AuthenticationRemoteDataSourceImpl authenticationRemoteDataSource;
+  final AuthenticationRemoteDataSource authenticationRemoteDataSource;
   AuthRepositoryImpl({
     required this.authenticationRemoteDataSource,
   });

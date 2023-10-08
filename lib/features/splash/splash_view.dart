@@ -6,7 +6,7 @@ import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
-import 'package:i_called/features/dashboard/dashboard_view.dart';
+import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {

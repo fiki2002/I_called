@@ -4,7 +4,7 @@ import 'package:i_called/core/firebase/firebase_helper.dart';
 import 'package:i_called/features/auth/data/models/auth_result_model.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';
 
-abstract class AuthenticationRemoteDataSourceImpl {
+abstract class AuthenticationRemoteDataSource {
   Future<AuthResultModel> login(String email, String password);
 
   Future<bool> isUserLoggedIn();
@@ -16,7 +16,7 @@ abstract class AuthenticationRemoteDataSourceImpl {
   );
 }
 
-class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSourceImpl {
+class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
   final FirebaseHelper _firebaseHelper;
   AuthRemoteDataSourceImpl({
     required FirebaseHelper firebaseHelper,
@@ -34,15 +34,20 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSourceImpl {
         message: "Unable to sign in user with this credential",
       );
     }
+    if (userCredential.user != null) {
+      final doc = await _firebaseHelper
+          .userCollectionRef()
+          .doc(userCredential.user?.uid)
+          .get();
 
+      final data = doc.data();
+      if (data != null) {
+        UserModel.fromJson(data);
+      }
+    }
     return const AuthResultModel(
       success: true,
       message: 'Account Successfully Signed In!',
-      user: UserModel(
-        userId: 'userId',
-        email: 'email',
-        userName: 'userName',
-      ),
     );
   }
 
@@ -63,14 +68,25 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSourceImpl {
         message: "Unable to create account with this credential",
       );
     }
+
+    final UserModel userModel = UserModel(
+      email: email,
+      userName: userName,
+    );
+
+    // Save User Data to Firestore
+    if (userCredential.user != null) {
+      final User user = userCredential.user!;
+      await _firebaseHelper
+          .userCollectionRef()
+          .doc(user.uid)
+          .set(userModel.toJson());
+    }
+
     return const AuthResultModel(
-        success: true,
-        message: 'Account Successfully Created!',
-        user: UserModel(
-          userId: 'userId',
-          email: 'email',
-          userName: 'userName',
-        ));
+      success: true,
+      message: 'Account Successfully Created!',
+    );
   }
 
   @override

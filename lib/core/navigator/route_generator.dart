@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/view/sign_up_view.dart';
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
-import 'package:i_called/features/dashboard/dashboard_view.dart';
+import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:i_called/features/splash/splash_view.dart';
 
 class RouteGenerator {
