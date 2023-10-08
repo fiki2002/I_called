@@ -5,7 +5,7 @@ class FirebaseHelper {
 
   /// Authentication
   FirebaseAuth get auth => FirebaseAuth.instance;
-  String get currentUserId {
+  String? get currentUserId {
 
     final String? userId = auth.currentUser?.uid;
     if (userId == null) throw const BaseFailures(message: 'User not found!');

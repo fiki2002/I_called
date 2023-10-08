@@ -11,7 +11,7 @@ import 'package:i_called/features/call_page/presentation/create_or_join_call.dar
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
 import 'package:i_called/features/call_page/presentation/preview_page.dart';
 import 'package:i_called/features/call_page/presentation/zego_cloud_prebuilt_widget.dart';
-import 'package:i_called/features/onboarding/onboarding_screen.dart';
+import 'package:i_called/features/splash/splash_view.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class RouteGenerator {
@@ -19,8 +19,8 @@ class RouteGenerator {
     final Object? args = settings.arguments;
 
     switch (settings.name) {
-      case OnboardingScreen.route:
-        return pageRoute(const OnboardingScreen());
+      case '/':
+        return pageRoute(const SplashPage());
       case LoginView.route:
         return pageRoute(const LoginView());
       case SignUpView.route:

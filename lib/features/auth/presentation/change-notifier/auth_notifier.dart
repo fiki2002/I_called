@@ -5,6 +5,7 @@ import 'package:i_called/core/failures/failures.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/core/utils/utils.dart';
 import 'package:i_called/features/auth/domain/entities/auth_entities.dart';
+import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
@@ -13,8 +14,10 @@ import 'package:i_called/features/call_page/presentation/create_or_join_call.dar
 class AuthNotifier extends ChangeNotifier {
   final SignUpUseCase signUpUsecase;
   final LoginUseCase loginUsecase;
+  final CheckUserLogInStatusUsecase checkUserLoginStatusUsecase;
 
   AuthNotifier({
+    required this.checkUserLoginStatusUsecase,
     required this.signUpUsecase,
     required this.loginUsecase,
   });
@@ -73,7 +76,7 @@ class AuthNotifier extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
         resetSignUpData();
-        AppRouter.instance.navigateTo(CreateOrJoinCall.route);
+        AppRouter.instance.clearRouteAndPush(CreateOrJoinCall.route);
         SnackBarService.showSuccessSnackBar(
           context: context,
           message: r.message,
@@ -138,8 +141,8 @@ class AuthNotifier extends ChangeNotifier {
         notifyListeners();
         _resetSignInData();
 
-        AppRouter.instance.navigateTo(CreateOrJoinCall.route);
-        
+        AppRouter.instance.clearRouteAndPush(CreateOrJoinCall.route);
+
         SnackBarService.showSuccessSnackBar(
           context: context,
           message: r.message,
@@ -147,5 +150,21 @@ class AuthNotifier extends ChangeNotifier {
         return Right(r);
       },
     );
+  }
+
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+
+  /// Check User Login Status
+  Future<bool> checkLoginStatus() async {
+    final res = await checkUserLoginStatusUsecase.call(NoParams());
+    res.fold(
+      (l) => Left(l),
+      (r) {
+        _isLoggedIn = true;
+        notifyListeners();
+      },
+    );
+    return _isLoggedIn;
   }
 }
