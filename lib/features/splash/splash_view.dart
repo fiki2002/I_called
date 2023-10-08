@@ -6,7 +6,7 @@ import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
-import 'package:i_called/features/call_page/presentation/create_or_join_call.dart';
+import 'package:i_called/features/dashboard/dashboard_view.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -87,7 +87,7 @@ class _SplashPageState extends State<SplashPage>
       () {
         final isLoggedIn = context.read<AuthNotifier>().isLoggedIn;
         if (isLoggedIn == true) {
-          AppRouter.instance.clearRouteAndPush(CreateOrJoinCall.route);
+          AppRouter.instance.clearRouteAndPush(DashboardView.route);
         } else {
           AppRouter.instance.clearRouteAndPush(LoginView.route);
         }
