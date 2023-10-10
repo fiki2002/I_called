@@ -144,11 +144,15 @@ class AuthNotifier extends ChangeNotifier {
       (r) {
         isLoading = false;
         notifyListeners();
+
         _resetSignInData();
+
         SnackBarService.showSuccessSnackBar(
           context: context,
           message: r.message,
         );
+        AppRouter.instance.clearRouteAndPush(DashboardView.route);
+
         return Right(r);
       },
     );

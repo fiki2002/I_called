@@ -30,7 +30,7 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      useSingleScroll: false,
+      useSingleScroll: true,
       body: Consumer<AuthNotifier>(
         builder: (_, auth, __) {
           return Form(
@@ -80,7 +80,7 @@ class _SignUpViewState extends State<SignUpView> {
                   hintText: '*******',
                   validator: (value) => value?.validatePassword(value),
                 ),
-                const Spacer(),
+                Gap.box(height: kBig100),
                 auth.isLoading
                     ? Button.loading(
                         onTap: () {},
@@ -103,7 +103,7 @@ class _SignUpViewState extends State<SignUpView> {
                           () => AppRouter.instance.navigateTo(LoginView.route),
                   ),
                 ),
-                const Spacer(),
+                Gap.box(height: kBig100),
               ],
             ),
           );
