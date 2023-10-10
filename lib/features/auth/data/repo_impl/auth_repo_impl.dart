@@ -29,7 +29,6 @@ class AuthRepositoryImpl extends AuthRepository {
         email,
         password,
       );
-
       return Either.right(result);
     } on FirebaseAuthException catch (e, s) {
       LoggerHelper.log('ERROR:: $e', s);

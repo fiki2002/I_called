@@ -9,11 +9,18 @@ import 'package:i_called/features/auth/presentation/change-notifier/auth_notifie
 import 'package:i_called/features/dashboard/domain/usecase/get_users_usecase.dart';
 import 'package:i_called/features/dashboard/presentation/change-notifier/home_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
-class MyApp extends StatelessWidget {
-  MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final GetIt getIt = SetUpLocators.getIt;
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -36,6 +43,20 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
         navigatorKey: AppRouter.instance.navigatorKey,
+         builder: (BuildContext context, Widget? child) {
+        return Stack(
+          children: [
+            child!,
+
+            /// support minimizing
+            ZegoUIKitPrebuiltCallMiniOverlayPage(
+              contextQuery: () {
+                return AppRouter.instance.navigatorKey.currentState!.context;
+              },
+            ),
+          ],
+        );
+      },
       ),
     );
   }

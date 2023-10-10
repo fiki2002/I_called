@@ -18,11 +18,12 @@ class SetUpLocators {
 
   static final getIt = GetIt.instance;
 
-  static void init() {
+  static Future<void> init() async {
     /// Data
     getIt.registerLazySingleton<AuthenticationRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(firebaseHelper: FirebaseHelper()),
     );
+
     getIt.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(firebaseHelper: FirebaseHelper()),
     );
@@ -55,7 +56,7 @@ class SetUpLocators {
         authenticationRemoteDataSource: getIt<AuthenticationRemoteDataSource>(),
       ),
     );
-      getIt.registerLazySingleton<HomeRepository>(
+    getIt.registerLazySingleton<HomeRepository>(
       () => HomeRepositoryImpl(
         homeRemoteDataSource: getIt<HomeRemoteDataSource>(),
       ),

@@ -79,22 +79,22 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
       userId: userCredential.user?.uid,
     );
 
-    // Save User Data to Firestore
+    // Save User Data to Fire store
     if (userCredential.user != null) {
-     userCredential.user!;
-      await _firebaseHelper
-          .userCollectionRef()
-          .add(userModel.toJson());
+      userCredential.user!;
+      await _firebaseHelper.userCollectionRef().add(userModel.toJson());
     }
 
-    return const AuthResultModel(
+    return  AuthResultModel(
       success: true,
       message: 'Account Successfully Created!',
+      user: userModel,
     );
   }
 
   @override
   Future<bool> isUserLoggedIn() async {
-    return _firebaseHelper.currentUserId != null;
+    return _firebaseHelper.currentUserId != null ||
+        _firebaseHelper.currentUserId == '';
   }
 }

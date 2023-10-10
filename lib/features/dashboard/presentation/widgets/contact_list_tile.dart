@@ -9,6 +9,7 @@ class ContactListTile extends StatelessWidget {
   final UserModel user;
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kfsTiny),
@@ -34,6 +35,8 @@ class ContactListTile extends StatelessWidget {
             isVideoCall: false,
             resourceID: "zegouikit_call",
             borderRadius: 10,
+            iconSize: const Size(40, 40),
+            buttonSize: const Size(50, 50),
             invitees: [
               ZegoUIKitUser(
                 id: user.userId ?? '',
@@ -45,12 +48,15 @@ class ContactListTile extends StatelessWidget {
             isVideoCall: true,
             resourceID: "zegouikit_call",
             borderRadius: 10,
+            iconSize: const Size(40, 40),
+            buttonSize: const Size(50, 50),
             invitees: [
               ZegoUIKitUser(
                 id: user.userId ?? '',
                 name: user.userName ?? '',
               ),
             ],
+            // onPressed: (v){},
           ),
         ],
       ),

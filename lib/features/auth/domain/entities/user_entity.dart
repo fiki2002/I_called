@@ -9,6 +9,15 @@ class UserEntity extends Equatable {
     this.userName,
     this.userId,
   });
+  
   @override
   List<Object?> get props => [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'user_name': userName,
+      'user_id': userId,
+    };
+  }
 }

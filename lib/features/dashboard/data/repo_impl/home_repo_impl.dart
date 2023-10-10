@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:i_called/core/exception/base_exception.dart';
 import 'package:i_called/core/exception/firebase_auth_exception.dart';
-
 import 'package:i_called/core/failures/base.dart';
 import 'package:i_called/core/failures/error_text.dart';
 import 'package:i_called/core/utils/logger.dart';
@@ -20,17 +19,18 @@ class HomeRepositoryImpl extends HomeRepository {
   @override
   Future<Either<Failures, Stream<List<UserModel>>>> getUsers() async {
     try {
-      final Stream<List<UserModel>> result = homeRemoteDataSource
-          .getUsers()
-          .map((querySnapshot) => querySnapshot.docs
-              .map(
-                (doc) => UserModel(
-                  email: doc.get('email'),
-                  userId: doc.get('user_id'),
-                  userName: doc.get('user_name'),
-                ),
-              )
-              .toList());
+      final Stream<List<UserModel>> result =
+          homeRemoteDataSource.getUsers().map(
+                (querySnapshot) => querySnapshot.docs
+                    .map(
+                      (doc) => UserModel(
+                        email: doc.get('email'),
+                        userId: doc.get('user_id'),
+                        userName: doc.get('user_name'),
+                      ),
+                    )
+                    .toList(),
+              );
       return Right(result);
     } on FirebaseAuthException catch (e) {
       return Left(AuthFirebaseException(e.code));

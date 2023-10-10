@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:fpdart/src/either.dart';
-
+import 'package:fpdart/fpdart.dart';
 import 'package:i_called/core/base_usecase/usecase_interface.dart';
 import 'package:i_called/core/failures/failures.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';

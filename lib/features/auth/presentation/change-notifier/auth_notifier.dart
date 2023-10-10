@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:i_called/core/constants/constants.dart';
@@ -87,9 +85,6 @@ class AuthNotifier extends ChangeNotifier {
           context: context,
           message: r.message,
         );
-        final id = Random().nextInt(1000).toString();
-
-        onUserLogin(r.user!, id);
 
         return Right(r);
       },
@@ -150,10 +145,6 @@ class AuthNotifier extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
         _resetSignInData();
-        final id = Random().nextInt(1000).toString();
-        onUserLogin(r.user!, id);
-        AppRouter.instance.clearRouteAndPush(DashboardView.route);
-
         SnackBarService.showSuccessSnackBar(
           context: context,
           message: r.message,
@@ -176,6 +167,7 @@ class AuthNotifier extends ChangeNotifier {
         notifyListeners();
       },
     );
+    LoggerHelper.log('IS USER LOGGED IN:: $_isLoggedIn');
     return _isLoggedIn;
   }
 

@@ -17,11 +17,12 @@ Future<void> main() async {
 
   ZegoUIKit().initLog().then(
     (value) {
+      
       ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
         [ZegoUIKitSignalingPlugin()],
       );
 
-      runApp(MyApp());
+      runApp(const MyApp());
     },
   );
 }

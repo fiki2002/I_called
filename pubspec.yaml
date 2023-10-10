@@ -24,6 +24,7 @@ dependencies:
   provider: ^6.0.5
   cloud_firestore: ^4.9.3
   get_it: ^7.6.4
+  shared_preferences: ^2.2.1
 
 dependency_overrides:
   awesome_notifications: ^0.8.2
