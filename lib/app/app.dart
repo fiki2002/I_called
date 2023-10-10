@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             checkUserLoginStatusUsecase: getIt<CheckUserLogInStatusUsecase>(),
           ),
         ),
-         ChangeNotifierProvider.value(
+        ChangeNotifierProvider.value(
           value: HomeNotifier(
             getUsersUsecase: getIt<GetUsersUsecase>(),
           ),

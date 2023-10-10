@@ -15,9 +15,9 @@ class HomeNotifier extends ChangeNotifier {
 
   bool isLoading = false;
 
-  List<UserModel>? _userModel;
-  List<UserModel>? get user => _userModel;
-  Future<Either<Failures, List<UserModel>>> getUser(
+  Stream<List<UserModel>>? _userModelList;
+  Stream<List<UserModel>>? get userList => _userModelList;
+  Future<Either<Failures, Stream<List<UserModel>>>> getUser(
     BuildContext context,
   ) async {
     isLoading = true;
@@ -38,7 +38,7 @@ class HomeNotifier extends ChangeNotifier {
       (r) {
         isLoading = false;
         notifyListeners();
-        _userModel = r;
+        _userModelList = r;
         notifyListeners();
         return Right(r);
       },

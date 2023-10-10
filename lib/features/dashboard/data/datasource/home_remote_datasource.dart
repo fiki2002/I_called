@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:i_called/core/firebase/firebase_helper.dart';
-import 'package:i_called/features/auth/data/models/user_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<UserModel>> getUsers();
+  Stream<QuerySnapshot> getUsers();
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -14,11 +13,10 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   });
 
   @override
-  Future<List<UserModel>> getUsers() async {
+  Stream<QuerySnapshot> getUsers() {
     Query<Map<String, dynamic>> userReference =
         firebaseHelper.userCollectionRef();
-    QuerySnapshot<Map<String, dynamic>> result =
-        await userReference.get();
-    return result.docs.map((e) => UserModel.fromJson(e.data())).toList();
+    Stream<QuerySnapshot> result = userReference.snapshots();
+    return result;
   }
 }

@@ -15,7 +15,7 @@ class TextWidget extends StatelessWidget {
     this.overflow,
     this.decoration,
     this.height,
-    this.fontStyle = FontStyle.italic,
+    this.fontStyle = FontStyle.normal,
   }) : super(key: key);
 
   final String text;
@@ -34,7 +34,6 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.raleway(
-        // style: TextStyle(
         fontSize: fontSize,
         color: textColor,
         fontWeight: fontWeight,

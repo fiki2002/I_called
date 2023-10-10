@@ -45,9 +45,13 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
         UserModel.fromJson(data);
       }
     }
-    return const AuthResultModel(
+    return AuthResultModel(
       success: true,
       message: 'Account Successfully Signed In!',
+      user: UserModel(
+        email: email,
+        userName: userCredential.user?.displayName ?? '',
+      ),
     );
   }
 
@@ -72,15 +76,15 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
     final UserModel userModel = UserModel(
       email: email,
       userName: userName,
+      userId: userCredential.user?.uid,
     );
 
     // Save User Data to Firestore
     if (userCredential.user != null) {
-      final User user = userCredential.user!;
+     userCredential.user!;
       await _firebaseHelper
           .userCollectionRef()
-          .doc(user.uid)
-          .set(userModel.toJson());
+          .add(userModel.toJson());
     }
 
     return const AuthResultModel(

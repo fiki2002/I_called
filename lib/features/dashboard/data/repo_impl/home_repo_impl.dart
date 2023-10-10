@@ -18,9 +18,19 @@ class HomeRepositoryImpl extends HomeRepository {
     required this.homeRemoteDataSource,
   });
   @override
-  Future<Either<Failures, List<UserModel>>> getUsers() async {
+  Future<Either<Failures, Stream<List<UserModel>>>> getUsers() async {
     try {
-      final List<UserModel> result = await homeRemoteDataSource.getUsers();
+      final Stream<List<UserModel>> result = homeRemoteDataSource
+          .getUsers()
+          .map((querySnapshot) => querySnapshot.docs
+              .map(
+                (doc) => UserModel(
+                  email: doc.get('email'),
+                  userId: doc.get('user_id'),
+                  userName: doc.get('user_name'),
+                ),
+              )
+              .toList());
       return Right(result);
     } on FirebaseAuthException catch (e) {
       return Left(AuthFirebaseException(e.code));

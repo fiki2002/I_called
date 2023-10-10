@@ -4,6 +4,7 @@ class UserModel extends UserEntity {
   const UserModel({
     super.email,
     super.userName,
+    super.userId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -21,6 +22,13 @@ class UserModel extends UserEntity {
       );
     }
 
+     final userId = json['user_id'];
+    if (userId is! String) {
+      throw FormatException(
+        'Invalid JSON: required "user_id" field of type String in $json',
+      );
+    }
+
     return UserModel(
       email: email,
       userName: userName,
@@ -31,6 +39,7 @@ class UserModel extends UserEntity {
     return {
       'email': email,
       'user_name': userName,
+      'user_id':userId,
     };
   }
 }
