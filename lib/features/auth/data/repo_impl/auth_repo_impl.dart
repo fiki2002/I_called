@@ -32,7 +32,6 @@ class AuthRepositoryImpl extends AuthRepository {
       );
       return Either.right(result);
     } on FirebaseAuthException catch (e, s) {
-      LoggerHelper.log('ERROR:: $e', s);
       return Either.left(AuthFirebaseException(e.code, s));
     } on SocketException {
       return const Left(BaseFailures(message: ErrorText.noInternet));

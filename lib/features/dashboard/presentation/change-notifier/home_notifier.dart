@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:i_called/core/failures/failures.dart';
-import 'package:i_called/core/utils/logger.dart';
 import 'package:i_called/core/utils/snack_bar_service.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
@@ -73,11 +72,6 @@ class HomeNotifier extends ChangeNotifier {
         notifyListeners();
         userModel = r;
         notifyListeners();
-
-        LoggerHelper.log('User Model:: $userModel');
-        LoggerHelper.log(
-          'Right Model:: ${userModel?.userId} ${userModel?.userName}',
-        );
         return Right(r);
       },
     );

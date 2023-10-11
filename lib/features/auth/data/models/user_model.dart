@@ -1,4 +1,3 @@
-import 'package:i_called/core/utils/logger.dart';
 import 'package:i_called/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -9,7 +8,6 @@ class UserModel extends UserEntity {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    LoggerHelper.log('FROM MAP:: $json');
     final email = json['email'];
 
     if (email is! String) {

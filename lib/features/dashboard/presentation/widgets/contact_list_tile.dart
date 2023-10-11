@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:i_called/features/dashboard/presentation/widgets/zego_send_call_button.dart';
 
 class ContactListTile extends StatelessWidget {
   const ContactListTile({super.key, required this.user});
@@ -39,32 +39,15 @@ class ContactListTile extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          ZegoSendCallInvitationButton(
-            isVideoCall: false,
-            resourceID: "zegouikit_call",
-            borderRadius: 10,
-            iconSize: const Size(40, 40),
-            buttonSize: const Size(50, 50),
-            invitees: [
-              ZegoUIKitUser(
-                id: user.userId ?? '',
-                name: user.userName ?? '',
-              ),
-            ],
+          ZegoSendCallButton(
+            isVideo: false,
+            userId: user.userId ?? '',
+            userName: user.userName ?? '',
           ),
-          ZegoSendCallInvitationButton(
-            isVideoCall: true,
-            resourceID: "zegouikit_call",
-            borderRadius: 10,
-            iconSize: const Size(40, 40),
-            buttonSize: const Size(50, 50),
-            invitees: [
-              ZegoUIKitUser(
-                id: user.userId ?? '',
-                name: user.userName ?? '',
-              ),
-            ],
-            // onPressed: (v){},
+          ZegoSendCallButton(
+            isVideo: true,
+            userId: user.userId ?? '',
+            userName: user.userName ?? '',
           ),
         ],
       ),
