@@ -8,6 +8,7 @@ import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/view/sign_up_view.dart';
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
 import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:i_called/features/onboarding/onboarding_screen.dart';
 import 'package:i_called/features/splash/splash_view.dart';
 
 class RouteGenerator {
@@ -17,6 +18,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return pageRoute(const SplashPage());
+      case OnboardingScreen.route:
+        return pageRoute(const OnboardingScreen());
       case LoginView.route:
         return pageRoute(const LoginView());
       case SignUpView.route:

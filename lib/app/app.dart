@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:i_called/app/locator.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
+import 'package:i_called/features/auth/domain/usecase/get_user_model_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider.value(
           value: HomeNotifier(
             getUsersUsecase: getIt<GetUsersUsecase>(),
+            getUserModelUsecase: getIt<GetUserModelUsecase>(),
           ),
         ),
       ],

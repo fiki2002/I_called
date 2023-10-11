@@ -4,6 +4,7 @@ import 'package:i_called/features/auth/data/datasource/remote_data_source.dart';
 import 'package:i_called/features/auth/data/repo_impl/auth_repo_impl.dart';
 import 'package:i_called/features/auth/domain/repositories/auth_repo.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
+import 'package:i_called/features/auth/domain/usecase/get_user_model_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:i_called/features/dashboard/data/datasource/home_remote_datasource.dart';
@@ -47,6 +48,11 @@ class SetUpLocators {
     getIt.registerLazySingleton<GetUsersUsecase>(
       () => GetUsersUsecase(
         homeRepository: getIt<HomeRepository>(),
+      ),
+    );
+    getIt.registerLazySingleton<GetUserModelUsecase>(
+      () => GetUserModelUsecase(
+        authenticationRepository: getIt<AuthRepository>(),
       ),
     );
 

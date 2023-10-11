@@ -9,7 +9,6 @@ class ContactListTile extends StatelessWidget {
   final UserModel user;
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kfsTiny),
@@ -27,8 +26,17 @@ class ContactListTile extends StatelessWidget {
             ),
           ),
           Gap.box(width: kfsMedium),
-          TextWidget(
-            user.userName ?? '',
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextWidget(
+                user.userName ?? '',
+              ),
+              Gap.box(height: kSmall10),
+              TextWidget(
+                user.userId ?? '',
+              ),
+            ],
           ),
           const Spacer(),
           ZegoSendCallInvitationButton(

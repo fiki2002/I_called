@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:i_called/core/failures/failures.dart';
+import 'package:i_called/features/auth/data/models/user_model.dart';
 import 'package:i_called/features/auth/domain/entities/auth_entities.dart';
 
 abstract class AuthRepository {
@@ -15,4 +16,6 @@ abstract class AuthRepository {
   });
 
   Future<Either<Failures, bool>> isUserLoggedIn();
+
+  Future<Either<Failures, UserModel?>> getUserModel();
 }

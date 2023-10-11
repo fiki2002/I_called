@@ -5,8 +5,7 @@ import 'package:i_called/core/components/text_widget.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
-import 'package:i_called/features/auth/presentation/view/login_view.dart';
-import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:i_called/features/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -85,12 +84,12 @@ class _SplashPageState extends State<SplashPage>
     Timer(
       const Duration(seconds: 2),
       () {
-        final isLoggedIn = context.read<AuthNotifier>().isLoggedIn;
-        if (isLoggedIn == true) {
-          AppRouter.instance.clearRouteAndPush(DashboardView.route);
-        } else {
-          AppRouter.instance.clearRouteAndPush(LoginView.route);
-        }
+        // final isLoggedIn = context.read<AuthNotifier>().isLoggedIn;
+        // if (isLoggedIn == true) {
+          // AppRouter.instance.clearRouteAndPush(DashboardView.route);
+        // } else {
+          AppRouter.instance.clearRouteAndPush(OnboardingScreen.route);
+        // }
       },
     );
   }

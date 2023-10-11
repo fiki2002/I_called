@@ -1,3 +1,4 @@
+import 'package:i_called/core/utils/logger.dart';
 import 'package:i_called/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -8,6 +9,7 @@ class UserModel extends UserEntity {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    LoggerHelper.log('FROM MAP:: $json');
     final email = json['email'];
 
     if (email is! String) {
@@ -22,7 +24,7 @@ class UserModel extends UserEntity {
       );
     }
 
-     final userId = json['user_id'];
+    final userId = json['user_id'];
     if (userId is! String) {
       throw FormatException(
         'Invalid JSON: required "user_id" field of type String in $json',
@@ -32,6 +34,7 @@ class UserModel extends UserEntity {
     return UserModel(
       email: email,
       userName: userName,
+      userId: userId,
     );
   }
 
@@ -40,7 +43,7 @@ class UserModel extends UserEntity {
     return {
       'email': email,
       'user_name': userName,
-      'user_id':userId,
+      'user_id': userId,
     };
   }
 }

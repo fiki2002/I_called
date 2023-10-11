@@ -35,76 +35,79 @@ class _SignUpViewState extends State<SignUpView> {
         builder: (_, auth, __) {
           return Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const TextWidget(
-                  'Sign up',
-                  fontSize: kfsExtraLarge,
-                  fontWeight: kW700,
-                ),
-                Gap.box(height: kSmall10),
-                const TextWidget('Welcome to iCalled'),
-                Gap.box(height: kBig30),
-                TextFieldWidget(
-                  onFieldSubmitted: (_) => _userNameNode.requestFocus(),
-                  keyboardType: TextInputType.emailAddress,
-                  focusNode: _emailNode,
-                  textInputAction: TextInputAction.next,
-                  onSaved: (v) => context.auth.updateSignUpData(email, v),
-                  validator: (value) => value?.validateEmail(),
-                  hintText: 'johndoe@gmail.com',
-                  title: 'Enter your Email',
-                ),
-                Gap.box(height: kfsTiny),
-                TextFieldWidget(
-                  onFieldSubmitted: (_) => _passwordNode.requestFocus(),
-                  keyboardType: TextInputType.name,
-                  focusNode: _userNameNode,
-                  onSaved: (v) => context.auth.updateSignUpData(userName, v),
-                  textInputAction: TextInputAction.next,
-                  validator: (value) => value?.validateAnyField(
-                    field: 'User name required',
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const TextWidget(
+                    'Sign up',
+                    fontSize: kfsExtraLarge,
+                    fontWeight: kW700,
                   ),
-                  hintText: 'Fiki',
-                  title: 'Enter your user name',
-                ),
-                Gap.box(height: kfsTiny),
-                TextFieldWidget(
-                  keyboardType: TextInputType.visiblePassword,
-                  focusNode: _passwordNode,
-                  onSaved: (v) => context.auth.updateSignUpData(password, v),
-                  textInputAction: TextInputAction.done,
-                  title: 'Enter password',
-                  onFieldSubmitted: (_) => _submit(),
-                  hintText: '*******',
-                  validator: (value) => value?.validatePassword(value),
-                ),
-                Gap.box(height: kBig100),
-                auth.isLoading
-                    ? Button.loading(
-                        onTap: () {},
-                      )
-                    : Button(
-                        text: 'Continue',
-                        onTap: () => _submit(),
-                      ),
-                Gap.box(height: kfsMedium),
-                Align(
-                  alignment: Alignment.center,
-                  child: TwoSpanTextWidget(
-                    'Already have an account?  ',
-                    'Click here',
-                    fontSize: kfsTiny,
-                    fontSize2: kfsTiny,
-                    textColor2: kPrimaryColor,
-                    recognizer2: TapGestureRecognizer()
-                      ..onTap =
-                          () => AppRouter.instance.navigateTo(LoginView.route),
+                  Gap.box(height: kSmall10),
+                  const TextWidget('Welcome to iCalled'),
+                  Gap.box(height: kBig30),
+                  TextFieldWidget(
+                    onFieldSubmitted: (_) => _userNameNode.requestFocus(),
+                    keyboardType: TextInputType.emailAddress,
+                    focusNode: _emailNode,
+                    textInputAction: TextInputAction.next,
+                    onSaved: (v) => context.auth.updateSignUpData(email, v),
+                    validator: (value) => value?.validateEmail(),
+                    hintText: 'johndoe@gmail.com',
+                    title: 'Enter your Email',
                   ),
-                ),
-                Gap.box(height: kBig100),
-              ],
+                  Gap.box(height: kfsTiny),
+                  TextFieldWidget(
+                    onFieldSubmitted: (_) => _passwordNode.requestFocus(),
+                    keyboardType: TextInputType.name,
+                    focusNode: _userNameNode,
+                    onSaved: (v) => context.auth.updateSignUpData(userName, v),
+                    textInputAction: TextInputAction.next,
+                    validator: (value) => value?.validateAnyField(
+                      field: 'User name required',
+                    ),
+                    hintText: 'Fiki',
+                    title: 'Enter your user name',
+                  ),
+                  Gap.box(height: kfsTiny),
+                  TextFieldWidget(
+                    keyboardType: TextInputType.visiblePassword,
+                    focusNode: _passwordNode,
+                    onSaved: (v) => context.auth.updateSignUpData(password, v),
+                    textInputAction: TextInputAction.done,
+                    title: 'Enter password',
+                    onFieldSubmitted: (_) => _submit(),
+                    hintText: '*******',
+                    validator: (value) => value?.validatePassword(value),
+                  ),
+                  Gap.box(height: kBig100),
+                  auth.isLoading
+                      ? Button.loading(
+                          onTap: () {},
+                        )
+                      : Button(
+                          text: 'Continue',
+                          onTap: () => _submit(),
+                        ),
+                  Gap.box(height: kfsMedium),
+                  Align(
+                    alignment: Alignment.center,
+                    child: TwoSpanTextWidget(
+                      'Already have an account?  ',
+                      'Click here',
+                      fontSize: kfsTiny,
+                      fontSize2: kfsTiny,
+                      textColor2: kPrimaryColor,
+                      recognizer2: TapGestureRecognizer()
+                        ..onTap =
+                            () => AppRouter.instance.navigateTo(LoginView.route),
+                    ),
+                  ),
+                  Gap.box(height: kBig100),
+                ],
+              ),
             ),
           );
         },

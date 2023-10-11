@@ -31,63 +31,66 @@ class _HomePageState extends State<LoginView> {
         builder: (_, auth, __) {
           return Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const TextWidget(
-                  'Sign in',
-                  fontSize: kfsExtraLarge,
-                  fontWeight: kW700,
-                ),
-                Gap.box(height: kSmall10),
-                const TextWidget('One Step Closer to Hassle-Free Calls'),
-                Gap.box(height: kBig30),
-                TextFieldWidget(
-                  textInputAction: TextInputAction.next,
-                  focusNode: _emailNode,
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (_) => _passwordNode.requestFocus(),
-                  validator: (value) => value?.validateEmail(),
-                  hintText: 'johndoe@gmail.com',
-                  onSaved: (v) => context.auth.updateSignInData(email, v),
-                  title: 'Enter your Email',
-                ),
-                Gap.box(height: kfsTiny),
-                TextFieldWidget(
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  onFieldSubmitted: (_) => _submit(),
-                  focusNode: _passwordNode,
-                  title: 'Enter password',
-                  hintText: '*******',
-                  onSaved: (v) => context.auth.updateSignInData(password, v),
-                  validator: (value) => value?.validatePassword(value),
-                ),
-                Gap.box(height: kBig100),
-                auth.isLoading
-                    ? Button.loading(
-                        onTap: () {},
-                      )
-                    : Button(
-                        text: 'Continue',
-                        onTap: () => _submit(),
-                      ),
-                Gap.box(height: kfsMedium),
-                Align(
-                  alignment: Alignment.center,
-                  child: TwoSpanTextWidget(
-                    'Don\'t have an account?  ',
-                    'Click here',
-                    fontSize: kfsTiny,
-                    fontSize2: kfsTiny,
-                    textColor2: kPrimaryColor,
-                    recognizer2: TapGestureRecognizer()
-                      ..onTap =
-                          () => AppRouter.instance.navigateTo(SignUpView.route),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const TextWidget(
+                    'Sign in',
+                    fontSize: kfsExtraLarge,
+                    fontWeight: kW700,
                   ),
-                ),
-                Gap.box(height: kBig100),
-              ],
+                  Gap.box(height: kSmall10),
+                  const TextWidget('One Step Closer to Hassle-Free Calls'),
+                  Gap.box(height: kBig30),
+                  TextFieldWidget(
+                    textInputAction: TextInputAction.next,
+                    focusNode: _emailNode,
+                    keyboardType: TextInputType.emailAddress,
+                    onFieldSubmitted: (_) => _passwordNode.requestFocus(),
+                    validator: (value) => value?.validateEmail(),
+                    hintText: 'johndoe@gmail.com',
+                    onSaved: (v) => context.auth.updateSignInData(email, v),
+                    title: 'Enter your Email',
+                  ),
+                  Gap.box(height: kfsTiny),
+                  TextFieldWidget(
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) => _submit(),
+                    focusNode: _passwordNode,
+                    title: 'Enter password',
+                    hintText: '*******',
+                    onSaved: (v) => context.auth.updateSignInData(password, v),
+                    validator: (value) => value?.validatePassword(value),
+                  ),
+                  Gap.box(height: kBig100),
+                  auth.isLoading
+                      ? Button.loading(
+                          onTap: () {},
+                        )
+                      : Button(
+                          text: 'Continue',
+                          onTap: () => _submit(),
+                        ),
+                  Gap.box(height: kfsMedium),
+                  Align(
+                    alignment: Alignment.center,
+                    child: TwoSpanTextWidget(
+                      'Don\'t have an account?  ',
+                      'Click here',
+                      fontSize: kfsTiny,
+                      fontSize2: kfsTiny,
+                      textColor2: kPrimaryColor,
+                      recognizer2: TapGestureRecognizer()
+                        ..onTap = () =>
+                            AppRouter.instance.navigateTo(SignUpView.route),
+                    ),
+                  ),
+                  Gap.box(height: kBig100),
+                ],
+              ),
             ),
           );
         },
@@ -99,6 +102,7 @@ class _HomePageState extends State<LoginView> {
   void initState() {
     _emailNode = FocusNode();
     _passwordNode = FocusNode();
+    
     super.initState();
   }
 

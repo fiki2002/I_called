@@ -6,14 +6,11 @@ import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/core/utils/logger.dart';
 import 'package:i_called/core/utils/utils.dart';
 import 'package:i_called/features/auth/domain/entities/auth_entities.dart';
-import 'package:i_called/features/auth/domain/entities/user_entity.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
 import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
-import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 class AuthNotifier extends ChangeNotifier {
   final SignUpUseCase signUpUsecase;
@@ -175,14 +172,4 @@ class AuthNotifier extends ChangeNotifier {
     return _isLoggedIn;
   }
 
-  void onUserLogin(UserEntity user, String id) {
-    LoggerHelper.log('User ${user.userName}');
-    ZegoUIKitPrebuiltCallInvitationService().init(
-      appID: appId,
-      appSign: appSign,
-      userID: '${user.userName}_$id',
-      userName: user.userName ?? '',
-      plugins: [ZegoUIKitSignalingPlugin()],
-    );
-  }
 }

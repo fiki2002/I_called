@@ -6,7 +6,7 @@ class AuthResultModel extends AuthResultEntity {
     required bool success,
     required String message,
     UserModel? user, 
-  }) : super(success: success, message: message, user: user);
+  }) : super(success: success, message: message, user: user,);
 
   factory AuthResultModel.fromJson(Map<String, dynamic> json) {
     final email = json['email'];
