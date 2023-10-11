@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:i_called/core/components/avatar.dart';
 import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
-import 'package:i_called/core/utils/logger.dart';
 import 'package:i_called/core/utils/utils.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';
 import 'package:i_called/features/dashboard/presentation/change-notifier/home_notifier.dart';
@@ -24,12 +23,17 @@ class _DashboardViewState extends State<DashboardView> {
   void initState() {
     super.initState();
     Future.microtask(
-      () {
+      () async {
+        /// FETCH CURRENT USER DETAILS
         Provider.of<HomeNotifier>(context, listen: false)
             .getCurrentUserDetails(context)
-            .then((value) {
-          onUserLogin();
-        });
+            .then(
+          (value) {
+            onUserLogin();
+          },
+        );
+
+        /// FETCH USERS
         return Provider.of<HomeNotifier>(context, listen: false)
             .getUser(context);
       },
@@ -57,26 +61,7 @@ class _DashboardViewState extends State<DashboardView> {
                 StreamBuilder<List<UserModel>>(
                   stream: homeNotifier.userList,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return TextWidget('${snapshot.error}');
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const TextWidget('No contacts');
-                    } else {
-                      final userList = snapshot.data;
-                      return ListView.separated(
-                        separatorBuilder: (context, i) =>
-                            Gap.box(height: kfsLarge),
-                        itemCount: userList?.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, contact) {
-                          final user = userList![contact];
-
-                          return ContactListTile(user: user);
-                        },
-                      );
-                    }
+                    return _buildUserList(snapshot);
                   },
                 ),
               ],
@@ -87,11 +72,37 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
+  Widget _buildUserList(AsyncSnapshot<List<UserModel>> snapshot) {
+    switch (snapshot.connectionState) {
+      case ConnectionState.waiting:
+        return const CircularProgressIndicator();
+      case ConnectionState.done:
+        if (snapshot.hasError) {
+          return TextWidget('${snapshot.error}');
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const TextWidget('No contacts');
+        } else {
+          final userList = snapshot.data;
+          return ListView.separated(
+            separatorBuilder: (context, i) => Gap.box(height: kfsLarge),
+            itemCount: userList?.length ?? 0,
+            shrinkWrap: true,
+            itemBuilder: (context, contact) {
+              final user = userList![contact];
+
+              return ContactListTile(user: user);
+            },
+          );
+        }
+      default:
+        return const TextWidget('Something went wrong');
+    }
+  }
+
   ZegoUIKitPrebuiltCallController? callController;
 
   void onUserLogin() async {
     final user = context.read<HomeNotifier>().userModel;
-    LoggerHelper.log('VALUE SHANU MI:: ${user?.userId} ${user?.userName}');
     callController ??= ZegoUIKitPrebuiltCallController();
     ZegoUIKitPrebuiltCallInvitationService().init(
       appID: appId,
