@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:i_called/core/exception/base_exception.dart';
@@ -37,6 +39,7 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
         message: "Unable to sign in user with this credential",
       );
     }
+
     final String? userId = _firebaseHelper.currentUserId;
     final DocumentSnapshot<Map<String, dynamic>> result =
         await _firebaseHelper.userCollectionRef().doc(userId).get();
@@ -66,10 +69,12 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
       );
     }
 
+    final phoneNumber = Random().nextInt(1000);
+
     final UserModel userModel = UserModel(
       email: email,
       userName: userName,
-      userId: userCredential.user?.uid,
+      userId: '080$phoneNumber',
     );
     // Save User Data to Fire store
     if (userCredential.user != null) {
@@ -95,7 +100,7 @@ class AuthRemoteDataSourceImpl extends AuthenticationRemoteDataSource {
     final DocumentSnapshot<Map<String, dynamic>> result =
         await _firebaseHelper.userCollectionRef().doc(userId).get();
 
-    return UserModel.fromJson(result.data()!);
+    return UserModel.fromJson(result.data() ?? {});
   }
 
   @override
