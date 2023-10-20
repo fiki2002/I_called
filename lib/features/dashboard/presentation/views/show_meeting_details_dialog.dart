@@ -9,6 +9,7 @@ import 'package:i_called/features/dashboard/data/model/meeting_details_model.dar
 import 'package:i_called/features/dashboard/presentation/change-notifier/home_notifier.dart';
 import 'package:i_called/features/dashboard/presentation/widgets/video_conference_page.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MeetingDetailsDialog extends StatefulWidget {
   const MeetingDetailsDialog({
@@ -76,6 +77,14 @@ class _MeetingDetailsDialogState extends State<MeetingDetailsDialog> {
                           fontWeight: kW700,
                         ),
                         Gap.box(width: kSmall10),
+                        GestureDetector(
+                          onTap: () {
+                            Share.share(
+                              'You have an invite from ${value.userModel?.userName ?? ''} on iCalled: $id',
+                            );
+                          },
+                          child: shareIcon.svg,
+                        ),
                         GestureDetector(
                           onTap: () {
                             Clipboard.setData(
