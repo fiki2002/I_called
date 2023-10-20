@@ -6,6 +6,7 @@ class SnackBarService {
   static void showErrorSnackBar({
     required BuildContext context,
     required String message,
+    EdgeInsetsGeometry? margin,
     Duration duration = const Duration(seconds: 5),
   }) {
     final snackBar = SnackBar(
@@ -19,7 +20,11 @@ class SnackBarService {
       ),
       behavior: SnackBarBehavior.floating,
       duration: duration,
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: margin ??
+          const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
       backgroundColor: Colors.red,
       action: SnackBarAction(
         label: 'dismiss',

@@ -14,7 +14,9 @@ class TextFieldWidget extends StatelessWidget {
     this.title,
     this.focusNode,
     this.textInputAction,
-    this.onFieldSubmitted, this.onSaved,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.controller,
   });
 
   final String? Function(String?)? validator;
@@ -27,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputAction? textInputAction;
   final Function(String)? onFieldSubmitted;
   final void Function(String?)? onSaved;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +43,13 @@ class TextFieldWidget extends StatelessWidget {
         ),
         Gap.box(height: kfsTiny),
         TextFormField(
+          controller: controller,
           onFieldSubmitted: onFieldSubmitted,
           textInputAction: textInputAction,
           focusNode: focusNode,
           inputFormatters: inputFormats,
           keyboardType: keyboardType,
-          onSaved: onSaved ,
+          onSaved: onSaved,
           validator: validator,
           decoration: InputDecoration(
             hintText: hintText ?? 'Enter your user name',

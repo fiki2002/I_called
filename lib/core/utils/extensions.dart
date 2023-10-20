@@ -28,7 +28,7 @@ extension ValidatingExtensions on String {
     }
   }
 
-   String? validatePassword(String value) {
+  String? validatePassword(String value) {
     if (value.isEmpty) {
       return 'Password is required';
     }
@@ -40,7 +40,6 @@ extension ValidatingExtensions on String {
 
     return null; // Return null if the validation succeeds
   }
-
 
   bool isValidPassword() {
     // Password must be at least 8 characters long
@@ -77,7 +76,7 @@ extension SvgExtension on String {
   SvgPicture get svg => SvgPicture.asset(
         this,
         fit: BoxFit.scaleDown,
-        color: kcWhiteColor,
+        color: kPrimaryColor.withOpacity(.2),
       );
 }
 

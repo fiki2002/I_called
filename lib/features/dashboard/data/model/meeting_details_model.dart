@@ -5,6 +5,7 @@ import 'package:i_called/features/dashboard/domain/entity/meeting_details.dart';
 class MeetingDetails extends MeetingDetailsEntity {
   const MeetingDetails({
      super.meetingId,
+     super.user,
   });
 
   String generateId() {

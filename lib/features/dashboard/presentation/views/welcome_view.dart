@@ -3,6 +3,7 @@ import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/app_router.dart';
 import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:i_called/features/dashboard/presentation/views/show_meeting_details_dialog.dart';
 import 'package:lottie/lottie.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -13,6 +14,7 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -42,14 +44,17 @@ class WelcomeView extends StatelessWidget {
                     Expanded(
                       child: _buildContainer(
                         title: 'New Meeting',
-                        onTap: () {},
+                        onTap: () => MeetingDetailsDialog.show(context),
                       ),
                     ),
                     Gap.box(width: kfsExtraLarge),
                     Expanded(
                       child: _buildContainer(
                         title: 'Join Meeting',
-                        onTap: () {},
+                        onTap: () => MeetingDetailsDialog.show(
+                          context,
+                          isJoin: true,
+                        ),
                       ),
                     ),
                   ],
@@ -60,9 +65,8 @@ class WelcomeView extends StatelessWidget {
                     Expanded(
                       child: _buildContainer(
                         title: 'View contacts',
-                        onTap: () => AppRouter.instance.navigateTo(
-                          DashboardView.route,
-                        ),
+                        onTap: () =>
+                            AppRouter.instance.navigateTo(DashboardView.route),
                       ),
                     ),
                     Gap.box(width: kfsExtraLarge),

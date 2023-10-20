@@ -7,14 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/view/sign_up_view.dart';
 import 'package:i_called/features/auth/presentation/view/login_view.dart';
+import 'package:i_called/features/dashboard/data/model/meeting_details_model.dart';
 import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:i_called/features/dashboard/presentation/views/welcome_view.dart';
+import 'package:i_called/features/dashboard/presentation/widgets/video_conference_page.dart';
 import 'package:i_called/features/onboarding/onboarding_screen.dart';
 import 'package:i_called/features/splash/splash_view.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // final Object? args = settings.arguments;
+    final Object? args = settings.arguments;
 
     switch (settings.name) {
       case '/':
@@ -27,9 +29,14 @@ class RouteGenerator {
         return pageRoute(const SignUpView());
       case DashboardView.route:
         return pageRoute(const DashboardView());
-        case WelcomeView.route:
+      case WelcomeView.route:
         return pageRoute(const WelcomeView());
-        
+      case VideoConferencePage.route:
+        return pageRoute(
+          VideoConferencePage(
+            user: args as MeetingDetails,
+          ),
+        );
       default:
         return errorRoute();
     }
