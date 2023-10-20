@@ -46,6 +46,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
         backgroundColor: kcWhiteColor,
         elevation: 0,
+        foregroundColor: kcTextColor,
         title: const TextWidget(
           'Contacts',
           fontSize: kfsExtraLarge,
@@ -54,37 +55,35 @@ class _DashboardViewState extends State<DashboardView> {
       ),
       body: Consumer<HomeNotifier>(
         builder: (context, homeNotifier, _) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 15.0),
-            child: Column(
-              children: [
-                StreamBuilder<List<UserModel>>(
-                  stream: homeNotifier.userList,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return TextWidget('${snapshot.error}');
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const TextWidget('No contacts');
-                    } else {
-                      final userList = snapshot.data;
-                      return ListView.separated(
-                        separatorBuilder: (context, i) =>
-                            Gap.box(height: kfsLarge),
-                        itemCount: userList?.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, contact) {
-                          final user = userList![contact];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              StreamBuilder<List<UserModel>>(
+                stream: homeNotifier.userList,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return TextWidget('${snapshot.error}');
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: TextWidget('No contacts'));
+                  } else {
+                    final userList = snapshot.data;
+                    return ListView.separated(
+                      separatorBuilder: (context, i) =>
+                          Gap.box(height: kfsLarge),
+                      itemCount: userList?.length ?? 0,
+                      shrinkWrap: true,
+                      itemBuilder: (context, contact) {
+                        final user = userList![contact];
 
-                          return ContactListTile(user: user);
-                        },
-                      );
-                    }
-                  },
-                ),
-              ],
-            ),
+                        return ContactListTile(user: user);
+                      },
+                    );
+                  }
+                },
+              ),
+            ],
           );
         },
       ),
@@ -123,6 +122,10 @@ class _DashboardViewState extends State<DashboardView> {
                 : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
 
         config.avatarBuilder = customAvatarBuilder;
+        config.topMenuBarConfig.buttons = [
+          ZegoMenuBarButtonName.minimizingButton,
+          ZegoMenuBarButtonName.showMemberListButton,
+        ];
 
         /// support minimizing, show minimizing button
         config.topMenuBarConfig.isVisible = true;

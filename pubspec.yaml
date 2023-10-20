@@ -24,7 +24,8 @@ dependencies:
   provider: ^6.0.5
   cloud_firestore: ^4.9.3
   get_it: ^7.6.4
-  shared_preferences: ^2.2.1
+  zego_uikit_prebuilt_video_conference: ^2.6.1
+  lottie: ^2.6.0
 
 dependency_overrides:
   awesome_notifications: ^0.8.2
@@ -42,3 +43,4 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/

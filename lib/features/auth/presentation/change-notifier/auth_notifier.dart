@@ -8,7 +8,7 @@ import 'package:i_called/features/auth/domain/entities/auth_entities.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
 import 'package:i_called/features/auth/domain/usecase/login_usecase.dart';
 import 'package:i_called/features/auth/domain/usecase/sign_up_usecase.dart';
-import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:i_called/features/dashboard/presentation/views/welcome_view.dart';
 
 class AuthNotifier extends ChangeNotifier {
   final SignUpUseCase signUpUsecase;
@@ -75,7 +75,7 @@ class AuthNotifier extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
         resetSignUpData();
-        AppRouter.instance.clearRouteAndPush(DashboardView.route);
+        AppRouter.instance.clearRouteAndPush(WelcomeView.route);
         SnackBarService.showSuccessSnackBar(
           context: context,
           message: r.message,
@@ -146,7 +146,7 @@ class AuthNotifier extends ChangeNotifier {
           context: context,
           message: r.message,
         );
-        AppRouter.instance.clearRouteAndPush(DashboardView.route);
+        AppRouter.instance.clearRouteAndPush(WelcomeView.route);
 
         return Right(r);
       },

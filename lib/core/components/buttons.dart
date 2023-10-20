@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:i_called/core/components/components.dart';
 import 'package:i_called/core/constants/constants.dart';
 
 class Button extends StatelessWidget {
@@ -78,16 +79,18 @@ class Button extends StatelessWidget {
   const Button.icon({
     super.key,
     required this.iconData,
-    required this.height,
-    required this.width,
+    // required this.height,
+    // required this.width,
     this.onTap,
     this.color,
     this.iconColor,
     this.iconSize,
     this.circular = false,
     this.active = true,
+    required this.text,
   })  : busy = false,
-        text = null,
+        width = null,
+        height = null,
         borderColor = null,
         textColor = null,
         textSize = kfsMedium,
@@ -175,10 +178,23 @@ class Button extends StatelessWidget {
           ),
         );
       } else {
-        return Icon(
-          iconData,
-          color: iconColor ?? Colors.white,
-          size: iconSize ?? 20.0,
+        return Row(
+          children: [
+            Text(
+              text ?? 'no text',
+              style: GoogleFonts.raleway(
+                fontWeight: textFontWeight,
+                color: textColor ?? Colors.white,
+                fontSize: (kfsMedium),
+              ),
+            ),
+            Gap.box(width: kfsExtraLarge),
+            Icon(
+              iconData,
+              color: iconColor ?? Colors.white,
+              size: iconSize ?? 20.0,
+            ),
+          ],
         );
       }
     } else {

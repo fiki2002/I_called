@@ -22,6 +22,7 @@ Widget customAvatarBuilder(
         ),
       ),
     ),
+    
     progressIndicatorBuilder: (context, url, downloadProgress) =>
         CircularProgressIndicator(value: downloadProgress.progress),
     errorWidget: (context, url, error) {

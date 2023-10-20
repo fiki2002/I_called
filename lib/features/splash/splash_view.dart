@@ -6,6 +6,7 @@ import 'package:i_called/core/constants/constants.dart';
 import 'package:i_called/core/navigator/navigator.dart';
 import 'package:i_called/features/auth/presentation/change-notifier/auth_notifier.dart';
 import 'package:i_called/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:i_called/features/dashboard/presentation/views/welcome_view.dart';
 import 'package:i_called/features/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -85,12 +86,12 @@ class _SplashPageState extends State<SplashPage>
     Timer(
       const Duration(seconds: 2),
       () {
-        final isLoggedIn = context.read<AuthNotifier>().isLoggedIn;
-        if (isLoggedIn == true) {
-          AppRouter.instance.clearRouteAndPush(DashboardView.route);
-        } else {
+        // final isLoggedIn = context.read<AuthNotifier>().isLoggedIn;
+        // if (isLoggedIn == true) {
+        //   AppRouter.instance.clearRouteAndPush(WelcomeView.route);
+        // } else {
           AppRouter.instance.clearRouteAndPush(OnboardingScreen.route);
-        }
+        // }
       },
     );
   }

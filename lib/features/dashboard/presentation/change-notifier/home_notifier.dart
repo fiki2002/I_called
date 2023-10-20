@@ -5,6 +5,7 @@ import 'package:i_called/core/utils/snack_bar_service.dart';
 import 'package:i_called/features/auth/data/models/user_model.dart';
 import 'package:i_called/features/auth/domain/usecase/check_user_log_in_status.dart';
 import 'package:i_called/features/auth/domain/usecase/get_user_model_usecase.dart';
+import 'package:i_called/features/dashboard/data/model/meeting_details_model.dart';
 
 import 'package:i_called/features/dashboard/domain/usecase/get_users_usecase.dart';
 
@@ -75,5 +76,12 @@ class HomeNotifier extends ChangeNotifier {
         return Right(r);
       },
     );
+  }
+
+  MeetingDetails userMeetingDetails = const MeetingDetails();
+
+  String getUserMeetingID() {
+    final String id = userMeetingDetails.generateId();
+    return id;
   }
 }
