@@ -3,6 +3,12 @@
 
 iCalled, a sophisticated communication app, redefines the way you connect with your contacts and engage in meetings. This GitHub README introduces you to iCalled, showcasing its seamless calling features and the creation and joining of meetings, all wrapped in a visually stunning user interface. iCalled is built with Flutter, offering a delightful cross-platform experience. Users can sign in using Firebase for secure authentication and save contacts on Firebase, ensuring easy access to your network wherever you go.
 
+## Preview
+
+https://github.com/fiki2002/I_called/assets/85044009/3c86b8be-71dc-466d-969b-0876f63bc160
+
+## Test It Out!🥹
+https://drive.google.com/file/d/1gm0zJN82TYjnlkUlNhKlkD_La63VNIAW/view?usp=drive_link
 
 ## Key Features
 
