@@ -7,9 +7,6 @@ iCalled, a sophisticated communication app, redefines the way you connect with y
 
 https://github.com/fiki2002/I_called/assets/85044009/3c86b8be-71dc-466d-969b-0876f63bc160
 
-## Test It Out!🥹
-https://drive.google.com/file/d/1gm0zJN82TYjnlkUlNhKlkD_La63VNIAW/view?usp=drive_link
-
 ## Key Features
 
 - Crystal-Clear Calls: Say farewell to dropped calls and distorted audio. iCalled ensures your conversations are consistently clear and reliable, making communication a breeze.
